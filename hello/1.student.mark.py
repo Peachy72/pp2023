@@ -1,3 +1,5 @@
+# Student Management System
+
 # Function to input number of students
 def input_no_student():
   no_stu = int(input("Number of students: "))
@@ -34,12 +36,12 @@ def input_mark(stu_info: list, course_info: list, no_stu: int):
 # Function to list students
 def print_stu(list):
   for i in range(len(list)):
-    print("ID:" , list[i][0]," Name: ", list[i][1],"DOB: ", list[i][2])
+    print("ID:" , list[i][0]," Name: ", list[i][1]," DOB: ", list[i][2])
 
 # Function to list courses
 def print_course(list):
   for i in range(len(list)):
-    print("ID: " , list[i][0],"Name: " , list[i][1])
+    print("ID: " , list[i][0]," Name: " , list[i][1])
 
 # Function to show student marks for a given course
 def print_mark(stu_info: list, course_info: list):
@@ -47,8 +49,9 @@ def print_mark(stu_info: list, course_info: list):
         print(course)
     sel = int(input("Select course: "))
     for i in range(len(stu_info)):
-        print("ID: ", stu_info[i][0],"Name: ", stu_info[i][1],"Grade:",stu_info[i][sel+2])
+        print("ID: ", stu_info[i][0]," Name: ", stu_info[i][1]," Grade: ",stu_info[i][sel+2])
 
+#main
 no_stu = input_no_student()
 stu_info = input_stu_info(no_stu)
 no_course = input_no_course()
