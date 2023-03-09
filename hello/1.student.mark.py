@@ -3,6 +3,8 @@
 # Function to input number of students
 def input_no_student():
   no_stu = int(input("Number of students: "))
+  while no_stu < 0:
+    no_stu = int(input("Enter appropriate number of students: "))
   return no_stu
 
 # Function to input student information with question of id, name and dob
@@ -15,6 +17,8 @@ def input_stu_info(no_stu: int):
 # Function to intput number of courses
 def input_no_course():
   no_course = int(input("Number of courses: "))
+  while no_course < 0:
+    no_course = int(input("Enter appropriate number of courses: "))
   return no_course
 
 # Function to input course information
