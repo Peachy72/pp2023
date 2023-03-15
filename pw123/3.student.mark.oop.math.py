@@ -1,5 +1,6 @@
 import math
 
+# Creating class for objects (students/courses)
 class Thing(object):
     def __init__(self, name: str, id: str) -> None:
         self._name = name
@@ -23,7 +24,7 @@ class Thing(object):
         self.id = id
         self._id = "ID is {}".format(id)
 
-
+# Student class inherits from Thing class
 class Student(Thing):
     def __init__(self, student_name: str, student_id: str, student_dob: str) -> None:
         Thing.__init__(self, student_name, student_id)
@@ -34,6 +35,11 @@ class Student(Thing):
         id = input("Enter student id: ")
         name = input("Enter student name: ")
         dob = input("Enter student date of birth: ")
+        # check if student already exists
+        for student in students:
+            if student.id == id:
+                print("Student already exists")
+                return
         student = Student(student_dob=dob, student_id=id, student_name=name)
         students.append(student)
         print("Student added!")
@@ -44,6 +50,7 @@ class Student(Thing):
         for student in students:
             print(student.id + "\t" + student.name + "\t" + student.dob)
 
+# Course class inherits from Thing class
 class Course(Thing):
     def __init__(self, course_name: str, course_id: str) -> None:
         Thing.__init__(self, course_name, course_id)
@@ -52,6 +59,11 @@ class Course(Thing):
         print("Adding a course...")
         id = input("Enter course id: ")
         name = input("Enter course name: ")
+        # check if course already exists
+        for course in courses:
+            if course.id == id:
+                print("Course already exists")
+                return
         course = Course(course_id=id, course_name=name)
         courses.append(course)
         print("Course added!")
@@ -134,6 +146,11 @@ class Mark:
                         print("Invalid choice")
                         return
 
+    # Function to round a number to a given number of decimals
+    def rounding(n, decimals=0):
+        multiplier = 10 ** decimals
+        return math.floor(n * multiplier + 0.5) / multiplier
+
     def list_marks():
         print("List marks")
         print("Student\tCourse\tMark")
@@ -147,7 +164,7 @@ class Mark:
             if mark.get_student_id() == student_id:
                 total += mark.get_mark()
                 count += 1
-        return total / count
+        return Mark.rounding(total / count, 2)
 
     def sort_students_by_gpa():
         for student in students:
@@ -163,7 +180,6 @@ students = []
 courses = []
 marks = []
 gpas = []
-
 
 
 def main():

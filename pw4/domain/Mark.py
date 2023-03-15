@@ -1,24 +1,26 @@
-import main
-from main import *
+import math
 
-def add_student(students: list):
-        print("Adding a student...")
-        id = input("Enter student id: ")
-        name = input("Enter student name: ")
-        dob = input("Enter student date of birth: ")
-        student = Student(student_dob=dob, student_id=id, student_name=name)
-        students.append(student)
-        print("Student added!")
+students = []
+courses = []
+marks = []
+gpas = []
 
-def add_course( courses: list):
-        print("Adding a course...")
-        id = input("Enter course id: ")
-        name = input("Enter course name: ")
-        course = Course(course_id=id, course_name=name)
-        courses.append(course)
-        print("Course added!")
+class Mark:
+    def __init__(self, student_id: str, course_id: str, mark: int) -> None:
+        self.student_id = student_id
+        self.course_id = course_id
+        self.mark = mark
 
-def add_mark( marks: list, students: list, courses: list):
+    def get_student_id(self) -> str:
+        return self.student_id
+
+    def get_course_id(self) -> str:
+        return self.course_id
+
+    def get_mark(self) -> int:
+        return self.mark
+
+    def add_mark( self, marks: list, students: list, courses: list):
         print("Adding a mark...")
         student_id_search = input("Enter student id: ")
         course_id_search = input("Enter course id: ")
@@ -67,9 +69,41 @@ def add_mark( marks: list, students: list, courses: list):
                     print("2. Exit")
                     choice = input("Enter your choice: ")
                     if choice == "1":
-                        add_course(courses)
+                        add_course()
                     elif choice == "2":
                         return
                     else:
                         print("Invalid choice")
                         return
+
+    # Function to round a number to a given number of decimals
+    def rounding(n, decimals=0):
+        multiplier = 10 ** decimals
+        return math.floor(n * multiplier + 0.5) / multiplier
+
+    def list_marks( self, marks: list):
+        print("List marks")
+        print("Student\tCourse\tMark")
+        for mark in marks:
+            print(mark.get_student_id() , "\t" , mark.get_course_id() , "\t" , mark.get_mark())
+
+    def get_gpa(student_id: str, marks: list) -> float:
+        total = 0
+        count = 0
+        for mark in marks:
+            if mark.get_student_id() == student_id:
+                total += mark.get_mark()
+                count += 1
+        if count == 0:
+            return 0
+        return Mark.rounding(total / count, 2)
+
+    def sort_students_by_gpa( self, students: list, gpas: list):
+        for student in students:
+            gpas.append(Mark.get_gpa(student.id))
+        gpas.sort()
+        print("ID\tName\tGPA")
+        for gpa in gpas:
+            for student in students:
+                if gpa == Mark.get_gpa(student.id):
+                    print(student.id + "\t" + student.name + "\t" + str(gpa))
