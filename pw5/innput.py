@@ -19,7 +19,13 @@ class Input:
                 print("Student already exists")
                 return
         student = Student(student_dob=dob, student_id=id, student_name=name)
+        # write student info to text file after input as a table
+        w = open("students.txt", "a+")
+        w.write(student.id + " " + student.name + " " + student.dob + "\n")
+        w.close()
+        # add student to list
         students.append(student)
+        # print success message
         print("Student added!")
     
     def add_course(courses: list):
@@ -32,7 +38,13 @@ class Input:
                 print("Course already exists")
                 return
         course = Course(course_id=id, course_name=name)
+        # write course info to text file after input as a table
+        w = open("courses.txt", "a+")
+        w.write(course.id + " " + course.name + "\n")
+        w.close()
+        # add course to list
         courses.append(course)
+        # print success message
         print("Course added!")
 
     def add_mark(marks: list, students: list, courses: list):
@@ -60,6 +72,10 @@ class Input:
 
             if selected_student_id is not None and selected_course_id is not None:
                 mark = Mark(student_id=student_id_search, course_id=course_id_search, mark=mark)
+                # write mark info to text file after input as a table
+                w = open("marks.txt", "a+")
+                w.write(mark.student_id + " " + mark.course_id + " " + str(mark.mark) + "\n")
+                w.close()
                 marks.append(mark)
                 print("Mark added!")
                 break
